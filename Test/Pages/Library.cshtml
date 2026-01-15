@@ -1,0 +1,79 @@
+﻿@page
+@model Test.Pages.LibraryModel
+@{
+    ViewData["Title"] = "Library";
+}
+
+<div class="container">
+    <h1 class="mb-4">Library</h1>
+
+    <form method="get" class="d-flex gap-2 mb-4">
+        <input asp-for="SearchTitle" class="form-control w-25" placeholder="Search title..." />
+
+        <select asp-for="SelectedAuthorId" asp-items="Model.AuthorSelectList" class="form-select w-25">
+            <option value="">All Authors</option>
+        </select>
+
+        <select asp-for="SortOrder" class="form-select w-25">
+            <option value="title_asc">Title (A-Z)</option>
+            <option value="title_desc">Title (Z-A)</option>
+            <option value="year_asc">Year (Oldest)</option>
+            <option value="year_desc">Year (Newest)</option>
+        </select>
+
+        <button type="submit" class="btn btn-success">Apply</button>
+    </form>
+
+    <h3>Authors</h3>
+    <table class="table table-bordered table-sm mb-5">
+        <thead class="table-light">
+            <tr>
+                <th>Name</th>
+                <th>Born</th>
+                <th>Books Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model.Authors)
+            {
+                <tr>
+                    <td>@author.FullName</td>
+                    <td>@author.BirthDate.ToShortDateString()</td>
+                    <td>@author.Books.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Books</h3>
+    @if (Model.Books.Count == 0)
+    {
+        <p class="text-muted">No books found.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead class="">
+                <tr>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Year</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.ISBN</td>
+                        <td>@book.PublishYear</td>
+                        <td>@book.Author.FullName</td>
+                        <td>@(book.Price.HasValue ? $"${book.Price}" : "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

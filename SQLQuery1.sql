@@ -1,0 +1,1 @@
+﻿DBCC CHECKIDENT ('Authors', RESEED, 1);
