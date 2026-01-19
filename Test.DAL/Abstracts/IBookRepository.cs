@@ -7,5 +7,8 @@ namespace Test.DAL.Abstracts
 	{
 		List<Book> GetAll();
 		void Add(Book book);
+		Book GetById(int id);
+		void Update(Book book);
+		void Delete(int id);
 	}
 }

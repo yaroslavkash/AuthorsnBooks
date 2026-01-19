@@ -1,0 +1,45 @@
+﻿@page "{id:int}"
+@model Test.Pages.EditBookModel
+
+<div class="container">
+    <h2>Edit Book</h2>
+
+    <form method="post" asp-page-handler="Update">
+        <input type="hidden" asp-for="Book.Id" />
+
+        <div class="mb-3">
+            <label>Title</label>
+            <input asp-for="Book.Title" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>ISBN</label>
+            <input asp-for="Book.ISBN" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label>Year</label>
+            <input asp-for="Book.PublishYear" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Price</label>
+            <input asp-for="Book.Price" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Author</label>
+            <select asp-for="Book.AuthorId" asp-items="Model.AuthorsList" class="form-select"></select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <hr />
+
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="Book.Id" />
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Delete book?');">Delete Book</button>
+        <a asp-page="/Library" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

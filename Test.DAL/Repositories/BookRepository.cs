@@ -28,5 +28,24 @@ namespace Test.DAL.Repositories
 				.Include(b => b.Author)
 				.ToList();
 		}
+		public Book GetById(int id)
+		{
+			return _context.Books.Include(b => b.Author).FirstOrDefault(b => b.Id == id);
+		}
+		public void Update(Book book)
+		{
+			_context.Books.Update(book);
+			_context.SaveChanges();
+		}
+
+		public void Delete(int id)
+		{
+			var book = _context.Books.Find(id);
+			if (book != null)
+			{
+				_context.Books.Remove(book);
+				_context.SaveChanges();
+			}
+		}
 	}
 }

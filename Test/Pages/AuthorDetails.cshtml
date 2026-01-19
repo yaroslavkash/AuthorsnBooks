@@ -1,0 +1,30 @@
+﻿@page "{id:int}"
+@model Test.Pages.AuthorDetailsModel
+
+<div class="container">
+    <h1>First Name: <span class="text-muted">@Model.Author.FirstName</span></h1>
+    <h1>Last Name: <span class="text-muted">@Model.Author.LastName</span></h1>
+    <h3>Was borned: <span class="text-muted">@Model.Author.BirthDate</span></h3>
+
+    <hr />
+    <h3>Author's Books</h3>
+
+    @if (Model.Author.Books == null || Model.Author.Books.Count == 0)
+    {
+        <div class="alert alert-warning">No books found.</div>
+    }
+    else
+    {
+        <ul class="list-group mb-3">
+            @foreach (var book in Model.Author.Books)
+            {
+                <li class="list-group-item">
+                    <strong>@book.Title</strong> (@book.PublishYear) - $@book.Price
+                </li>
+            }
+        </ul>
+    }
+
+    <a asp-page="/EditAuthor" asp-route-id="@Model.Author.Id" class="btn btn-warning">Edit Profile</a>
+    <a asp-page="/Library" class="btn btn-secondary">Back</a>
+</div>

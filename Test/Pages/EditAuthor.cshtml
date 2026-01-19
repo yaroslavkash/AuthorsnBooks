@@ -1,0 +1,43 @@
+﻿@page "{id:int}"
+@model Test.Pages.EditAuthorModel
+
+<div class="container">
+    <h2>Edit Author</h2>
+
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+
+    <form method="post" asp-page-handler="Update">
+
+        <input type="hidden" asp-for="Author.Id" />
+
+        <div class="mb-3">
+            <label>First Name</label>
+            <input asp-for="Author.FirstName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Last Name</label>
+            <input asp-for="Author.LastName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Birth Date</label>
+            <input asp-for="Author.BirthDate" type="date" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <hr />
+
+    <form method="post" asp-page-handler="Delete">
+        <input type="hidden" asp-for="Author.Id" />
+
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Tochno vydalyty?');">Delete</button>
+
+        <a asp-page="/Library" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

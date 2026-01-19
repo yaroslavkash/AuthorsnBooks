@@ -9,5 +9,7 @@ namespace Test.DAL.Abstracts
 		void Add(Author author);
 		Author GetById(int id);
 		bool IsDuplicate(string firstName, string lastName);
+		void Update(Author author);
+		void Delete(int id);
 	}
 }
